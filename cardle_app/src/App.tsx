@@ -12,6 +12,8 @@ import PrivacyPolicy from "./components/PrivacyPolicy";
 import CreatePost from "./components/Create-post";
 import Trade from "./components/Trade";
 import Shop from "./components/Shop";
+import ProductShopDetail from "./components/ProductShopDetail";
+import ProductTradeDetail from "./components/ProductTradeDetail";
 
 function PageWrapper() {
   const location = useLocation();
@@ -41,6 +43,8 @@ function PageWrapper() {
         <Route path="/create-post" element={<CreatePost />} />
         <Route path="/trade" element={<Trade />} />
         <Route path="/shop" element={<Shop />} />
+        <Route path="/trade/product/:id" element={<ProductTradeDetail />} />
+        <Route path="/shop/product/:id" element={<ProductShopDetail />} />
       </Routes>
     </div>
   );
