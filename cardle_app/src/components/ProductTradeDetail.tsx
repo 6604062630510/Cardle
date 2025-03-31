@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { supabase } from '../database/client'; 
 import { Link, useNavigate } from "react-router-dom"; 
-import TradeComments from './TradeComments';
-
+import TradeComments from "../components/TradeComments";
 
 function ProductTradeDetail() {
   const { id } = useParams();
@@ -111,7 +110,7 @@ function ProductTradeDetail() {
     if (offerImage) {
       const fileName = `offer_${Date.now()}_${offerImage.name}`;
       const { data, error } = await supabase.storage
-        .from('Offer')
+        .from('offer')
         .upload(fileName, offerImage);
 
       if (error) {
@@ -334,9 +333,10 @@ const toggleFavorite = async (id_post: number) => {
           {product.has_want && (
             <div className="mt-5">
 
-                <h4 className="ms-5">{product.by_user.acc_name} กำลังมองหา 👀</h4>
+                
 
               {product.post_img_i_want && product.post_img_i_want.length > 0 && (
+                
                 <div className="d-flex justify-content-center mt-5 mb-5" style={{ gap: '150px' }}>
                   {product.post_img_i_want.slice(0, 2).map((image: string, index: number) => (
                     <div
@@ -350,7 +350,7 @@ const toggleFavorite = async (id_post: number) => {
                         borderRadius: '8px',
                         marginBottom: '10px',
                       }}
-                    >
+                    > <h4 className="ms-5">{product.by_user.acc_name} กำลังมองหา 👀</h4>
                       <img
                         src={image}
                         alt={`Wanted Image ${index + 1}`}
@@ -418,14 +418,13 @@ const toggleFavorite = async (id_post: number) => {
                 </div>
                 <div className="modal-body">
                   <div className="form-group">
-                    <label>Title</label>
+                    <label>รายละเอียดการ์ดของ {currentUser.acc_name}</label>
                     <textarea
-                      className="form-control mb-3"
+                      className="form-control"
                       value={offerTitle}
                       onChange={(e) => setOfferTitle(e.target.value)}
                       required
                     />
-                    <label>รายละเอียดการ์ดของ {currentUser.acc_name}</label>
                     <textarea
                       className="form-control"
                       value={offerDescription}
@@ -434,7 +433,7 @@ const toggleFavorite = async (id_post: number) => {
                     />
                   </div>
                   <div className="form-group mt-3">
-                    <label>อัปโหลดรูป 1 รูป</label>
+                    <label>อัปโหลดรูป</label>
                     <input
                       type="file"
                       className="form-control"

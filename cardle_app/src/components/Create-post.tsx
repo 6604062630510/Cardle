@@ -212,10 +212,10 @@ const handleImageChange = async (
   return (
     <div className="container my-4">
       <div className="d-flex mb-3">
-        <button className={`btn ${postType === "trade" ? "btn-primary" : "btn-outline-primary"} mx-1`} onClick={() => setPostType("trade")}>
+        <button className={`btn ${postType === "trade" ? "btn-success" : "btn-outline-success"} mx-1`} onClick={() => setPostType("trade")}>
           Trade Post
         </button>
-        <button className={`btn ${postType === "sell" ? "btn-primary" : "btn-outline-primary"} mx-1`} onClick={() => setPostType("sell")}>
+        <button className={`btn ${postType === "sell" ? "btn-success" : "btn-outline-success"} mx-1`} onClick={() => setPostType("sell")}>
           Sell Post
         </button>
       </div>
@@ -362,7 +362,7 @@ const handleImageChange = async (
       </div>
 
       <div className="mb-3">
-        <label>Upload Image (max 3 images)</label>
+        <label>อัปโหลดรูป (สูงสุด 3 รูป)</label>
         <input type="file" className="form-control" multiple onChange={(e) => handleImageChange(e, "post_img", null)} required />
       </div>
       <div className="d-flex mt-4 mb-3 justify-content-center">
