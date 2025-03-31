@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { supabase } from '../database/client';
 import { useNavigate } from "react-router-dom"; 
+import ShopComments from './ShopComments';
 
 import { Link } from 'react-router-dom';
 
@@ -301,7 +302,7 @@ const toggleFavorite = async (id_post: number) => {
                 </div>
     )}
             </div>
-          
+            <ShopComments id_post={product.id_post} currentUser={currentUser} />
         </div>
       ) : (
         <p>Loading product details...</p>
