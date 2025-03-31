@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { supabase } from '../database/client'; 
 import { Link, useNavigate } from "react-router-dom"; 
@@ -112,7 +112,7 @@ function ProductTradeDetail() {
       const { data, error } = await supabase.storage
         .from('offer')
         .upload(fileName, offerImage);
-
+      console.log(data)
       if (error) {
         console.error("Error uploading image:", error.message);
         alert("เกิดข้อผิดพลาดในการอัปโหลดรูป");
@@ -183,6 +183,8 @@ const toggleFavorite = async (id_post: number) => {
     const favPosts: number[] = currentUser.fav_post_trade || [];
     return favPosts.includes(id_post);
   };
+
+  console.log(isFavorite); 
 
 
 
@@ -460,39 +462,6 @@ const toggleFavorite = async (id_post: number) => {
     </div>
   );
 }
-const toggleFavorite = async (id_post: number) => {
-  const storedUser = localStorage.getItem("currentUser");
-  if (!storedUser) {
-    alert("กรุณาเข้าสู่ระบบก่อนเพิ่มรายการโปรด");
-    return;
-  }
-  const currentUser = JSON.parse(storedUser);
-  let favPosts: number[] = currentUser.fav_post_trade || [];
-  let action = "";
-  if (favPosts.includes(id_post)) {
-    favPosts = favPosts.filter((item: number) => item !== id_post);
-    action = "ลบออก";
-  } else {
 
-    favPosts.push(id_post);
-    action = "เพิ่ม";
-  }
-
-  const { error } = await supabase
-    .from('Users')
-    .update({ fav_post_trade: favPosts })
-    .eq('id', currentUser.id);
-
-  if (error) {
-    console.error("Error updating favorites:", error.message);
-    alert("เกิดข้อผิดพลาดในการอัปเดตรายการโปรด");
-  } else {
-    alert(`${action}สินค้าในรายการโปรดเรียบร้อยแล้ว`);
-
-    currentUser.fav_post_trade = favPosts;
-    localStorage.setItem("currentUser", JSON.stringify(currentUser));
-    window.location.reload();
-  }
-};
 
 export default ProductTradeDetail;

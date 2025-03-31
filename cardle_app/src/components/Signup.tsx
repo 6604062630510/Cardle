@@ -25,6 +25,7 @@ function Signup() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   console.log(formData);
+  console.log(loading); 
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement| HTMLTextAreaElement>) {
     setFormData((prevFormData) => ({
@@ -47,7 +48,7 @@ function Signup() {
       const { data, error } = await supabase.storage
         .from("idcard_pic")
         .upload(filePath, file);
-
+        console.log(data); 
       if (error) throw error;
       return filePath;
     } catch (error) {

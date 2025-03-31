@@ -152,13 +152,12 @@ function Fav() {
       activeTab === "trade"
         ? currentUser.fav_post_trade || []
         : currentUser.fav_post_sell || [];
-    let action = "";
     if (favPosts.includes(id_post)) {
       favPosts = favPosts.filter((item) => item !== id_post);
-      action = "ลบออก";
+
     } else {
       favPosts.push(id_post);
-      action = "เพิ่ม";
+
     }
     const { error } = await supabase
       .from("Users")

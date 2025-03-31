@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams} from "react-router-dom";
 import { supabase } from "../database/client";
 
 function ViewConfirm() {
@@ -122,7 +122,7 @@ function ViewConfirm() {
     }
   };
   
-  const handleResetBuyers = async () => {
+  /*const handleResetBuyers = async () => {
     const confirmation = window.confirm("Are you sure you want to reset all?");
     if (!confirmation) return;
 
@@ -159,10 +159,10 @@ function ViewConfirm() {
     } finally {
       setIsProcessing(false);
     }
-  };
+  };*/
 
 
-  const isPostDealed = buyers.every((buyer) => buyer.status === "waiting");
+ // const isPostDealed = buyers.every((buyer) => buyer.status === "waiting");
 
   if (loading) return <p>Loading...</p>;
 

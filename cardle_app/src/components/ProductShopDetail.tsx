@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { supabase } from '../database/client';
 import { useNavigate } from "react-router-dom"; 
@@ -68,6 +68,8 @@ function ProductShopDetail() {
   };
 
   if (error) {
+    console.log(setIsSubmitting)
+    console.log(isConfirm)
     return <div>{error}</div>;
   }
 
@@ -107,7 +109,7 @@ const toggleFavorite = async (id_post: number) => {
     const favPosts: number[] = currentUser.fav_post_sell || [];
     return favPosts.includes(id_post);
   };
-
+  console.log(isFavorite); 
   const openBuyModal = () => {
     if (!currentUser) {
       navigate("/signin", { state: { from: `/shop/product/${id}` } }); // ส่งสถานะของหน้าเดิมไปหน้า signin
@@ -369,40 +371,6 @@ const toggleFavorite = async (id_post: number) => {
     </div>
   );
 }
-const toggleFavorite = async (id_post: number) => {
-  const storedUser = localStorage.getItem("currentUser");
-  if (!storedUser) {
-    alert("กรุณาเข้าสู่ระบบก่อนเพิ่มรายการโปรด");
-    return;
-  }
-  const currentUser = JSON.parse(storedUser);
-  let favPosts: number[] = currentUser.fav_post_sell || [];
-  let action = "";
-  if (favPosts.includes(id_post)) {
-    // ถ้ามีอยู่แล้ว ให้ลบออก
-    favPosts = favPosts.filter((item: number) => item !== id_post);
-    action = "ลบออก";
-  } else {
-    // ถ้าไม่มี ให้เพิ่มเข้าไป
-    favPosts.push(id_post);
-    action = "เพิ่ม";
-  }
 
-  const { error } = await supabase
-    .from('Users')
-    .update({ fav_post_sell: favPosts })
-    .eq('id', currentUser.id);
-
-  if (error) {
-    console.error("Error updating favorites:", error.message);
-    alert("เกิดข้อผิดพลาดในการอัปเดตรายการโปรด");
-  } else {
-    alert(`${action}สินค้าในรายการโปรดเรียบร้อยแล้ว`);
-    // อัปเดต currentUser ใน localStorage
-    currentUser.fav_post_sell = favPosts;
-    localStorage.setItem("currentUser", JSON.stringify(currentUser));
-    window.location.reload(); // รีโหลดหน้าเพื่ออัปเดต UI (หรือใช้ state อัปเดต UI ได้)
-  }
-};
 
 export default ProductShopDetail;

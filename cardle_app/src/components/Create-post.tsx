@@ -177,6 +177,7 @@ const handleImageChange = async (
 
       const { data, error } = await supabase.from("Posts-trade").insert([updatedTradeData]);
 
+      console.log(data); 
       if (error) {
         alert("Error submitting trade post: " + error.message);
       } else {
@@ -196,7 +197,7 @@ const handleImageChange = async (
       
       
       const { data, error } = await supabase.from("Posts-sell").insert([updatedSellData]);
-
+      console.log(data); 
       if (error) {
         alert("Error submitting sell post: " + error.message);
       } else {

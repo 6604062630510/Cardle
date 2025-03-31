@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 function TrackingSell() {
   const { id } = useParams();
   const [trackingData, setTrackingData] = useState<any>(null);
-  const [userData, setUserData] = useState<any>(null);
   const [partnerData, setPartnerData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [deliveryComp, setDeliveryComp] = useState<string>("");

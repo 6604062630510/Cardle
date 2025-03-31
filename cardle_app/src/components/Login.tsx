@@ -9,7 +9,7 @@ import imgSignIn from "../assets/signin.png";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState<string | null>(null);
+
   const navigate = useNavigate();
   const location = useLocation();
   const [showPassword, setShowPassword] = useState(false);
@@ -32,7 +32,6 @@ function Login() {
     e.preventDefault();
 
     try {
-      setError(null);
       const { data: user, error: loginError } = await supabase
         .from("Users")
         .select("*")
@@ -41,37 +40,33 @@ function Login() {
 
       if (loginError) {
         toast.error("อีเมลหรือรหัสผ่านไม่ถูกต้อง");
-        setError("อีเมลหรือรหัสผ่านไม่ถูกต้อง");
         return;
       }
       if (!user) {
         toast.error("ไม่พบผู้ใช้ที่มีอีเมลนี้");
-        setError("ไม่พบผู้ใช้ที่มีอีเมลนี้");
         return;
       }
 
       const isPasswordValid = await bcrypt.compare(password, user.password);
       if (!isPasswordValid) {
         toast.error("รหัสผ่านไม่ถูกต้อง");
-        setError("รหัสผ่านไม่ถูกต้อง");
         return;
       }
 
       if (user.status === "banned") {
         toast.error("บัญชีของคุณถูกแบน");
-        setError("บัญชีของคุณถูกแบน");
         return;
       } else if (user.status === "waiting") {
         toast.warning("บัญชีของคุณอยู่ในสถานะรอการอนุมัติ");
-        setError("บัญชีของคุณอยู่ในสถานะรอการอนุมัติ");
+
         return;
       } else if (user.status === "rejected") {
         toast.error("บัญชีของคุณถูกปฏิเสธ");
-        setError("บัญชีของคุณถูกปฏิเสธ");
+
         return;
       } else if (user.status !== "approved") {
         toast.error("บัญชีของคุณยังไม่ได้รับการอนุมัติ");
-        setError("บัญชีของคุณยังไม่ได้รับการอนุมัติ");
+ 
         return;
       }
 
@@ -90,7 +85,6 @@ function Login() {
       }
     } catch (error: any) {
       toast.error("เกิดข้อผิดพลาดในการล็อกอิน");
-      setError("เกิดข้อผิดพลาดในการล็อกอิน");
       console.error(error.message);
     }
   };

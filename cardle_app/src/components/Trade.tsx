@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { supabase } from '../database/client';
 import CardFactory from './CardFactory';
 import { TradeCardProps } from './Interface/CardProps';
@@ -125,14 +125,14 @@ const Trade = () => {
       return;
     }
     let favPosts: number[] = currentUser.fav_post_trade || [];
-    let action = '';
+
     if (favPosts.includes(id_post)) {
 
       favPosts = favPosts.filter((item) => item !== id_post);
-      action = 'ลบออก';
+
     } else {
       favPosts.push(id_post);
-      action = 'เพิ่ม';
+
     }
     const { error } = await supabase
       .from('Users')

@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { supabase } from "../database/client";
-import { toast } from "react-toastify";
+
 import { useNavigate } from "react-router-dom";
 
 function Admin() {
+  //import { toast } from "react-toastify";
   const [users, setUsers] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -62,6 +63,7 @@ function Admin() {
   }, []);
 
   const approveUser = async (id: string, email: string) => {
+    console.log(email); 
     try {
       const { error } = await supabase
         .from("Users")
@@ -79,7 +81,7 @@ function Admin() {
       setError(error.message);
     }
   };
-
+// @ts-ignore
   const rejecteUser = async (id: string, email: string) => {
     try {
       const { error } = await supabase
@@ -142,7 +144,7 @@ function Admin() {
 
 
   // ฟังก์ชันลบผู้ใช้
-  const deleteUser = async (id: string) => {
+ /* const deleteUser = async (id: string) => {
     try {
       // ตรวจสอบว่าเป็นแอดมินหรือไม่
       const user = users.find((u) => u.id === id);
@@ -163,7 +165,7 @@ function Admin() {
     } catch (error: any) {
       setError(error.message);
     }
-  };
+  };*/
 
 
 

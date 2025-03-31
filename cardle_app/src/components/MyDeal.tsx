@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { supabase } from "../database/client";
+import { useEffect, useState } from "react";
 import { PostTradeStrategy } from "./StrategyMyDeal/PostTradeStrategy";
 import { PostSellStrategy } from "./StrategyMyDeal/PostSellStrategy";
 import { OfferStrategy } from "./StrategyMyDeal/OfferStrategy";
@@ -13,7 +12,6 @@ function MyDeal() {
   const [myShop, setMyShop] = useState<any[]>([]);
   const [statusFilter, setStatusFilter] = useState("all");
   const [typeFilter, setTypeFilter] = useState("post-trade");
-  const [imgStatus, setImgStatus] = useState("waiting.png");
   const currentUser = JSON.parse(localStorage.getItem("currentUser") || "{}");
 
   const strategyMap: { [key: string]: any } = {

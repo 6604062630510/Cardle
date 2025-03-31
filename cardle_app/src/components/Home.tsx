@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import headImg from "../assets/se-pic 2.svg";
 import { supabase } from "../database/client";
 import CardFactory from './CardFactory'; // Import Card component ที่รองรับทั้ง Sell และ Trade
@@ -9,7 +9,7 @@ function Home() {
   const scrollRefSell = useRef<HTMLDivElement>(null);  
   const [tradeProducts, setTradeProducts] = useState<any[]>([]);
   const [sellProducts, setSellProducts] = useState<any[]>([]);
-  const [error, setError] = useState<string | null>(null);
+  //const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [noPostsFound, setNoPostsFound] = useState<boolean>(false);
 
@@ -20,6 +20,8 @@ function Home() {
 
   // ดึงข้อมูลผู้ใช้จาก localStorage
   useEffect(() => {
+    console.log(loading); 
+    console.log(noPostsFound); 
     const storedUser = localStorage.getItem("currentUser");
     if (storedUser) {
       setCurrentUser(JSON.parse(storedUser));
@@ -138,14 +140,13 @@ const onToggleFavorite = async (id_post: number) => {
       return;
     }
     let favPosts: number[] = currentUser.fav_post_trade || [];
-    let action = '';
     if (favPosts.includes(id_post)) {
       // ถ้ามีอยู่แล้ว ให้ลบออก
       favPosts = favPosts.filter((item) => item !== id_post);
-      action = 'ลบออก';
+
     } else {
       favPosts.push(id_post);
-      action = 'เพิ่ม';
+  
     }
     const { error } = await supabase
       .from('Users')
@@ -184,7 +185,7 @@ const onToggleFavorite = async (id_post: number) => {
         </div>
       )}
       
-      {error && <div className="alert alert-danger">{error}</div>}
+      {/*{error && <div className="alert alert-danger">{error}</div>}*/}
 
       <header className="bg-primary text-white py-5 bodyhead">
         <div className="container">
