@@ -19,6 +19,8 @@ import EditPro from "./components/EditPro";
 import MyDeal from "./components/MyDeal";
 import ViewConfirm from "./components/ViewConfirm";
 import ViewOffer from "./components/ViewOffer";
+import Tracking from "./components/Tracking";
+import TrackingSell from "./components/TrackingSell";
 
 
 
@@ -57,6 +59,8 @@ function PageWrapper() {
         <Route path="/mydeal" element={<MyDeal/>}/>
         <Route path="/trade/product-offer/:id" element={<ViewOffer />} />
         <Route path="/shop/product-waiting/:id" element={<ViewConfirm />} />
+        <Route path="/trade/product-tracking/:id" element={<Tracking/>} />
+        <Route path="/shop/product-tracking/:id" element={<TrackingSell/>} />
       </Routes>
     </div>
   );
