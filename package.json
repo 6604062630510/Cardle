@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "react-bootstrap": "^2.10.9",
+    "react-select": "^5.10.1"
+  },
+  "devDependencies": {
+    "@types/react-select": "^5.0.0"
+  }
+}
