@@ -14,6 +14,9 @@ import Trade from "./components/Trade";
 import Shop from "./components/Shop";
 import ProductShopDetail from "./components/ProductShopDetail";
 import ProductTradeDetail from "./components/ProductTradeDetail";
+import UserProfile from "./components/UserProfile";
+import EditPro from "./components/EditPro";
+
 
 function PageWrapper() {
   const location = useLocation();
@@ -45,6 +48,8 @@ function PageWrapper() {
         <Route path="/shop" element={<Shop />} />
         <Route path="/trade/product/:id" element={<ProductTradeDetail />} />
         <Route path="/shop/product/:id" element={<ProductShopDetail />} />
+        <Route path="/profile/:username" element={<UserProfile/>} />
+        <Route path="/edit-profile/:username" element={<EditPro/>} />
       </Routes>
     </div>
   );
