@@ -9,6 +9,9 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Admin from "./components/Admin";
 import PrivacyPolicy from "./components/PrivacyPolicy";
+import CreatePost from "./components/Create-post";
+import Trade from "./components/Trade";
+import Shop from "./components/Shop";
 
 function PageWrapper() {
   const location = useLocation();
@@ -35,7 +38,9 @@ function PageWrapper() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy/>} />
-
+        <Route path="/create-post" element={<CreatePost />} />
+        <Route path="/trade" element={<Trade />} />
+        <Route path="/shop" element={<Shop />} />
       </Routes>
     </div>
   );
