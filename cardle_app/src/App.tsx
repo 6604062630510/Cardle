@@ -16,6 +16,10 @@ import ProductShopDetail from "./components/ProductShopDetail";
 import ProductTradeDetail from "./components/ProductTradeDetail";
 import UserProfile from "./components/UserProfile";
 import EditPro from "./components/EditPro";
+import MyDeal from "./components/MyDeal";
+import ViewConfirm from "./components/ViewConfirm";
+import ViewOffer from "./components/ViewOffer";
+
 
 
 function PageWrapper() {
@@ -32,7 +36,7 @@ function PageWrapper() {
     pageClass = "privacy-policy-page";
   }
   
-  let items = ["Home", "Trade", "Shop"];
+  let items = ["Home", "Trade", "Shop", "My Deal"];
 
   return (
     <div className={`app-container ${pageClass}`}>
@@ -50,6 +54,9 @@ function PageWrapper() {
         <Route path="/shop/product/:id" element={<ProductShopDetail />} />
         <Route path="/profile/:username" element={<UserProfile/>} />
         <Route path="/edit-profile/:username" element={<EditPro/>} />
+        <Route path="/mydeal" element={<MyDeal/>}/>
+        <Route path="/trade/product-offer/:id" element={<ViewOffer />} />
+        <Route path="/shop/product-waiting/:id" element={<ViewConfirm />} />
       </Routes>
     </div>
   );
